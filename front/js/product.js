@@ -39,11 +39,6 @@ addToCart.addEventListener("click", function() {
     // Créer un objet product avec les informations du produit sélectionné
     let product = {
     id: id,
-    imageUrl: item__img.querySelector('img').src,
-    altTxt: item__img.querySelector('img').alt,
-    title: title.innerHTML,
-    price: price.innerHTML,
-    description: description.innerHTML,
     color: color.value,
     quantity: quantity.value
     };
@@ -51,13 +46,9 @@ addToCart.addEventListener("click", function() {
     //vérifie que le produit n'existe pas déjà dans le panier
     // et si oui, ajoute la quantité au produit existant
     // sinon, ajoute le produit au panier
-    if (cart.length > 0) {
-        for (i = 0; i < cart.length; i++) {
-            if (cart[i].id == product.id && cart[i].color == product.color) {
-                cart[i].quantity = parseInt(cart[i].quantity) + parseInt(product.quantity);
-                break;
-            } 
-        }
+    let existingProductIndex = cart.findIndex(item => item.id === id && item.color === color.value);
+    if (existingProductIndex !== -1) {
+        cart[existingProductIndex].quantity = parseInt(cart[existingProductIndex].quantity) + parseInt(product.quantity);
     } else {
         cart.push(product);
     }
