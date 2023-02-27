@@ -25,37 +25,36 @@ fetch(`http://localhost:3000/api/products/${id}`)
 });
 
 addToCart.addEventListener("click", function() {
-    // Récupérer les produits stockés dans le localStorage
-    let cart = JSON.parse(localStorage.getItem("cart")) || [];
-
     // vérifie que les champs sont remplis
     if (color.value == "" || quantity.value == 0) {
         alert("Veuillez chosir une couleur et une quantité");
         return;
     } else {
         alert("Le produit a été ajouté au panier");
-    }
+    };
 
     // Créer un objet product avec les informations du produit sélectionné
     let product = {
-    id: id,
-    color: color.value,
-    quantity: quantity.value
+        id: id,
+        color: color.value,
+        quantity: quantity.value
     };
 
-    //vérifie que le produit n'existe pas déjà dans le panier
-    // et si oui, ajoute la quantité au produit existant
+    // Récupérer les produits stockés dans le localStorage
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+    // vérifie que le produit n'existe pas déjà dans le panier
+    // si oui, ajoute la quantité au produit existant
     // sinon, ajoute le produit au panier
     let existingProductIndex = cart.findIndex(item => item.id === id && item.color === color.value);
     if (existingProductIndex !== -1) {
         cart[existingProductIndex].quantity = parseInt(cart[existingProductIndex].quantity) + parseInt(product.quantity);
     } else {
         cart.push(product);
-    }
-
-    console.log(cart);
+    };
 
     // Stocker les produits dans le localStorage
     localStorage.setItem("cart", JSON.stringify(cart));
 
+    console.log(cart);
 });

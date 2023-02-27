@@ -39,7 +39,7 @@ fetch("http://localhost:3000/api/products")
     });   
 
 // Affiche le nombre d'articles dans le panier et le prix total
-// En prenant le prix depuis l'api
+// (En prenant le prix depuis l'api)
 function displayCartTotal() {
     let cartTotal = 0;
     let cartQuantity = 0;
@@ -60,7 +60,7 @@ function displayCartTotal() {
 }
 displayCartTotal();
 
-// Modifier la quantité d'un article et le prix total
+// Modifier la quantité d'un article
 cart__items.addEventListener("change", function(e) {
     if (e.target.classList.contains("itemQuantity")) {
         let cartItem = e.target.parentElement.parentElement.parentElement.parentElement;
